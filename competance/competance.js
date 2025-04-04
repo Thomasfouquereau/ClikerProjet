@@ -22,23 +22,21 @@ closeCompetanceBtn.addEventListener('click', () => {
     toggleCompetanceModal();
 });
 
-//lvl de la compétence
-let forceLvl = 0;
-let enduranceLvl = 0;
-let bouclierLvl = 0;
-
-// Coût de la compétence
-let forceCost = 10;
-let enduranceCost = 10; 
-let bouclierCost = 10;
-
-// Puissance de la compétence
-let forceBoost = 1;
-let enduranceBoost = 1;
-let bouclierBoost = 1;
-
-//malus de la compétence
-let forceMalus = 0;
-let enduranceMalus = 0;
-let bouclierMalus = 0;
+export const competenceStats = {
+    forceLvl: 0,
+    enduranceLvl: 0,
+    bouclierLvl: 0,
+  
+    forceCost: 10,
+    enduranceCost: 10, 
+    bouclierCost: 10,
+  
+    forceBoost: 1,
+    enduranceBoost: 1,
+    bouclierBoost: 1,
+  
+    forceMalus: 0,
+    enduranceMalus: 0,
+    bouclierMalus: 0,
+};
 

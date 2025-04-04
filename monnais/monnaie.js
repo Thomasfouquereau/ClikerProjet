@@ -1,3 +1,5 @@
+import {convertCurrencyAll} from './convertCurrency.js'; // Import de la fonction convertCurrencyAll}
+
 export let copper = 0; // Permet de modifier la valeur de copper
 let silver = 0; // Score en argent
 let gold = 0; // Score en or

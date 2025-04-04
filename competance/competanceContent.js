@@ -1,4 +1,8 @@
 import { convertCurrencyAll } from '../monnais/convertCurrency.js';// Importer la fonction convertCurrencyAll
+import { competenceStats } from './competance.js';// Importer les statistiques de compétence
+import { buyCompetance } from './buyCompetance.js';// Importer la fonction buyCompetance
+
+
 const competanceContentModal = document.getElementById('competanceContent');
 
 const competanceContent = document.createElement('div');//cree le conteneur de la modale de competance
@@ -47,6 +51,11 @@ function createCompetanceItem(title, description) {
     competanceItemCost.textContent = 'Coût: 10';
     competanceItem.appendChild(competanceItemCost); // Ajouté à competanceItem
     competanceItemDescription.classList.add('hidden'); // Masque la description par défaut
+
+    // Ajoute un événement pour gérer le clic sur le bouton de compétence
+    competanceItem.addEventListener('click', () => {
+        buyCompetance(title);
+    });
 
     // Ajoute les événements pour afficher/masquer la description
     competanceItem.addEventListener('mouseover', () => {
