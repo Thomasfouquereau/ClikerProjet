@@ -93,12 +93,15 @@ button:disabled,
 
 #closeCompetanceModal {
     color: #aaa;
-    float: right;
+    position: absolute;
+    top: 10px;
+    right: 25px;
     font-size: 28px;
     font-weight: bold;
 }
 
 #competanceContent {
+    position: relative;
     background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
@@ -134,4 +137,10 @@ button:disabled,
     align-items: center;
     margin-top: 20px;
     gap: 20px;
+}
+
+.competanceItem{
+    width: 20%;
+    text-align: center;
+
 }
