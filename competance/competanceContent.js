@@ -48,22 +48,20 @@ function createCompetanceItem(title, description) {
     competanceItem.appendChild(competanceItemDescription); // Ajouté à competanceItem
 
     const competanceItemCost = document.createElement('p'); // Crée le coût de la compétence
-    competanceItemCost.textContent = 'Coût: 10';
+    // Ajoute un id pour mettre à jour ce champ par la suite
+    competanceItemCost.setAttribute('id', 'competanceCost-' + title);
+    competanceItemCost.textContent = 'Coût: ' + competenceStats[title + 'Cost'];
     competanceItem.appendChild(competanceItemCost); // Ajouté à competanceItem
-    competanceItemDescription.classList.add('hidden'); // Masque la description par défaut
 
-    // Ajoute un événement pour gérer le clic sur le bouton de compétence
+    // Ajoute les événements pour afficher/masquer la description
     competanceItem.addEventListener('click', () => {
         buyCompetance(title);
     });
-
-    // Ajoute les événements pour afficher/masquer la description
     competanceItem.addEventListener('mouseover', () => {
-        competanceItemDescription.classList.remove('hidden'); // Affiche la description
+        competanceItemDescription.classList.remove('hidden');
     });
-
     competanceItem.addEventListener('mouseout', () => {
-        competanceItemDescription.classList.add('hidden'); // Masque la description
+        competanceItemDescription.classList.add('hidden');
     });
 }
 
@@ -73,5 +71,5 @@ competanceArray.forEach(competance => {
 });
 
 
-convertCurrencyAll(1000000, 50000, 0, 0); // Test de la fonction avec des valeurs initiales
+
 //cree des competence passive (ex: chance de critique, chance d anuller les degats, chance de regen d endurance)
