@@ -24,7 +24,6 @@ button:disabled,
     cursor: not-allowed;
 }
 
-
 .MonnaieContainer {
     display: flex;
     justify-content: center;
@@ -127,4 +126,12 @@ button:disabled,
 #bouclier {
     background-color: rgb(28, 67, 122);
     color: white;
+}
+
+.statsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
 }

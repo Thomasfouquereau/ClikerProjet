@@ -20,15 +20,15 @@ competanceContent.appendChild(competanceItemContainer); // Ajouté à competance
 const competanceArray = [
     {
         title: 'force',
-        description: 'ajoute 1 point de force',
+        description: 'ajoute 1 point de force et un malus de 15% sur l\'endurance a chaque achat',
     },
     {
         title: 'endurance',
-        description: 'ajoute 1 point d\'endurance',
+        description: 'ajoute 1 point d\'endurance et un malus de 15% sur le bouclier a chaque achat',
     },
     {
         title: 'bouclier',
-        description: 'ajoute 1 point de bouclier',
+        description: 'ajoute 1 point de bouclier et un malus de 15% sur la force a chaque achat',
     },
 ];
 
@@ -70,6 +70,45 @@ competanceArray.forEach(competance => {
     createCompetanceItem(competance.title, competance.description);
 });
 
+export function competanceStatsDisplay() {
+    // Si un conteneur de stats existe déjà, on le vide ; sinon, on le crée et l'ajoute à competanceContent
+    let statsContainer = document.querySelector('.statsContainer');
+    if (!statsContainer) {
+        statsContainer = document.createElement('div');
+        statsContainer.classList.add('statsContainer');
+        competanceContent.appendChild(statsContainer);
+    } else {
+        statsContainer.innerHTML = ''; // Nettoie les anciennes stats
+    }
+    
+    // Définit les statistiques à afficher
+    const stats = [
+        { id: 'force', label: 'Force', level: competenceStats.forceLvl, boost: competenceStats.forceBoost, malus: competenceStats.enduranceMalus, malusLabel: 'Endurance Malus' },
+        { id: 'endurance', label: 'Endurance', level: competenceStats.enduranceLvl, boost: competenceStats.enduranceBoost, malus: competenceStats.bouclierMalus, malusLabel: 'Bouclier Malus' },
+        { id: 'bouclier', label: 'Bouclier', level: competenceStats.bouclierLvl, boost: competenceStats.bouclierBoost, malus: competenceStats.forceMalus, malusLabel: 'Force Malus' }
+    ];
+    
+    // Pour chaque statistique, crée un bloc avec niveau, boost et malus
+    stats.forEach(stat => {
+        const statDiv = document.createElement('div');
+        statDiv.classList.add(stat.id + 'Stats');
+        statsContainer.appendChild(statDiv);
+        
+        const levelP = document.createElement('p');
+        // Mise à jour de l'élément identifié (pour permettre une future mise à jour individuelle)
+        levelP.setAttribute('id', stat.id + 'Lvl');
+        levelP.textContent = stat.label + ': ' + stat.level;
+        statDiv.appendChild(levelP);
+        
+        const boostP = document.createElement('p');
+        boostP.textContent = stat.label + ' Boost: ' + stat.boost;
+        statDiv.appendChild(boostP);
+        
+        const malusP = document.createElement('p');
+        malusP.textContent = stat.malusLabel + ': ' + stat.malus;
+        statDiv.appendChild(malusP);
+    });
+}
 
-
+competanceStatsDisplay()
 //cree des competence passive (ex: chance de critique, chance d anuller les degats, chance de regen d endurance)
