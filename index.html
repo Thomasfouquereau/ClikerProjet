@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLICKER PROJET</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game">
+        <h1>CLICKER PROJET</h1>
+
+        <div class="MonnaieContainer">
+            <p>Monnaie :</p>
+            <div id="MonnaiePlatinum" class="MonnaiePlatinum">
+                <span id="platinumCoin"></span>
+                <span id="platinum">0</span>
+            </div>
+            <div id="MonnaieGold" class="MonnaieGold">
+                <span id="goldCoin"></span>
+                <span id="gold">0</span>
+            </div>
+            <div id="MonnaieSilver" class="MonnaieSilver">
+                <span id="silverCoin"></span>
+                <span id="silver">0</span>
+            </div>
+            <div id="MonnaieCopper" class="MonnaieCopper">
+                <span id="copperCoin"></span>
+                <span id="copper">0</span>
+            </div>
+        </div>
+
+        <button id="clicker">Cliquez-moi !</button>
+    </div>
+    <button id="competance">competance</button>
+    <div id="competanceModal">
+        <div id="competanceContent">
+            <button id="closeCompetanceModal">X</button>
+        </div>
+    </div>
+    <!-- <script src="script.js" type="module"></script> -->
+    <script src="./monnais/monnaie.js" type="module"></script>
+    <script src="clickSpace.js" type="module"></script>
+    <script src="updateScore.js" type="module"></script>
+    <script src="./competance/competance.js" type="module"></script>
+    <script src="./competance/competanceContent.js" type="module"></script>
+</body>
+
+</html>
