@@ -43,10 +43,11 @@ export function convertCurrency() {
 }
 
 export function updateDisplays() {
-    copper = parseInt(localStorage.getItem('copper')) || 0;
+    copper = parseFloat(localStorage.getItem('copper')) || 0; // Utiliser parseFloat ici
     silver = parseInt(localStorage.getItem('silver')) || 0;
     gold = parseInt(localStorage.getItem('gold')) || 0;
     platinum = parseInt(localStorage.getItem('platinum')) || 0;
+
     convertCurrency();
     copperMonnaie.textContent = copper;
     silverMonnaie.textContent = silver;
@@ -57,9 +58,19 @@ export function updateDisplays() {
 
 // Fonction pour ajouter du copper (utilisée par updateScore)
 export function addCopper(amount) {
-    copper += amount;
+    // Convertir copper en nombre pour éviter les erreurs
+    copper = parseFloat(copper) || 0;
+    amount = parseFloat(amount) || 0;
+
+    // Ajouter et arrondir à deux décimales
+    copper = Math.round((copper + amount) * 100) / 100;
+
+    // Mettre à jour localStorage
     localStorage.setItem('copper', copper);
+
+    // Convertir les devises si nécessaire
     convertCurrency();
+
     return copper;
 }
 

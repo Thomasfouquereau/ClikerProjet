@@ -144,6 +144,11 @@ export function competanceStatsDisplay() {
     const force = Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100));
     enduranceCostPerClick.textContent = `Coût d'endurance par clic : ${(competenceStats.enduranceMalus * force).toFixed(2)}`;
     additionalStatsDiv.appendChild(enduranceCostPerClick);
+
+    // Taux de cuivre par clic
+    const copperPerClick = document.createElement('p');
+    copperPerClick.textContent = `Taux de cuivre par clic : ${competenceStats.cuivreTauxPerClick.toFixed(2)} C`;
+    additionalStatsDiv.appendChild(copperPerClick);
 }
 
 competanceStatsDisplay()
