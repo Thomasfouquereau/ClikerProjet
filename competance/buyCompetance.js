@@ -40,7 +40,7 @@ export function buyCompetance(title) {
     } else if (title === 'endurance') {
         competenceStats.enduranceLvl++;
         competenceStats.enduranceCost *= 2; // Met à jour le coût avant l'affichage
-        competenceStats.enduranceBoost *= 1.15;
+        competenceStats.enduranceBoost *= 1.75;
         competenceStats.bouclierMalus *= 1.05;
         competenceStats.enduranceMax++;
         localStorage.setItem('enduranceLvl', competenceStats.enduranceLvl);

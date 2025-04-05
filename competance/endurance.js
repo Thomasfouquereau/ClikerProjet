@@ -29,10 +29,13 @@ export function updateEnduranceDisplay() {
         + ' / ' + competenceStats.enduranceMax;
 }
 
-// Ajoutez un élément pour afficher le timer
+/// Ajoutez un élément pour afficher le timer
 const enduranceTimerDisplay = document.getElementById('enduranceTimer');
 
-const enduranceRegeneration = Math.max(5000 * (1 - competenceStats.enduranceBoost / 100), 200); // Temps de régénération avec un minimum de 0,2s
+// Définir enduranceRegenerationTimer avant son utilisation
+const enduranceRegenerationTimer = parseFloat(localStorage.getItem('enduranceRegenerationTimer')) || 4000; // Valeur par défaut de 4000 ms
+const enduranceBoost = competenceStats.enduranceBoost || 0; // Boost d'endurance en pourcentage
+const enduranceRegeneration = Math.max(200, enduranceRegenerationTimer * (1 - enduranceBoost / 100)); // Temps de régénération avec un minimum de 0,2s
 
 setInterval(() => {
     if (endurance < Number(competenceStats.enduranceMax)) {
@@ -52,7 +55,6 @@ setInterval(() => {
         enduranceTimerDisplay.textContent = `Prochaine régénération dans : ${(timer / 1000).toFixed(1)}s`;
     }
 }, 100); // Met à jour toutes les 100 ms
-
 export function getCurrentEndurance() {
     return endurance; // Retourne la valeur actuelle de l'endurance
 }

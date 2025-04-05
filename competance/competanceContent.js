@@ -128,10 +128,10 @@ export function competanceStatsDisplay() {
     statsContainer.appendChild(additionalStatsDiv);
 
     // Temps de recharge de l'endurance
-    // Temps de recharge de l'endurance
-    const enduranceRechargeTime = document.createElement('p');
-    const enduranceBoost = competenceStats.enduranceBoost || 0;
-    const enduranceRegeneration = Math.max(5000 * (1 - enduranceBoost / 100), 200); // Temps de régénération avec un minimum de 0,2s
+    const enduranceRechargeTime = document.createElement('p'); // Crée un élément <p> pour afficher le temps de recharge
+    const enduranceRegenerationTimer = parseFloat(localStorage.getItem('enduranceRegenerationTimer')) || 4000; // Valeur par défaut de 4000 ms
+    const enduranceBoost = competenceStats.enduranceBoost || 0; // Boost d'endurance en pourcentage
+    const enduranceRegeneration = Math.max(200, enduranceRegenerationTimer * (1 - enduranceBoost / 100)); // Réduction basée sur le pourcentage
     enduranceRechargeTime.textContent = `Temps de recharge de l'endurance : ${(enduranceRegeneration / 1000).toFixed(2)}s`;
     additionalStatsDiv.appendChild(enduranceRechargeTime);
 

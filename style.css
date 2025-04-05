@@ -142,5 +142,43 @@ button:disabled,
 .competanceItem{
     width: 20%;
     text-align: center;
+}
 
+#clicker{
+    height: 600px;
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 40px;
+}
+
+#enduranceBarContainer{
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.enduranceContainer{
+    width: 30%;
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+}
+
+#resetButton{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }

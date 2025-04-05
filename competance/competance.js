@@ -45,7 +45,9 @@ export const competenceStats = {
     bouclierMax: localStorage.getItem('bouclierMax') || 5,
 
     enduranceCostPerClick: localStorage.getItem('enduranceCostPerClick') || 1,
+    enduranceRegenerationTimer: localStorage.getItem('enduranceRegenerationTimer') || 4000, // Temps de régénération de l'endurance
 
     cuivreTauxPerClick: parseFloat(localStorage.getItem('cuivreTauxPerClick')) || 1,
 };
+
 
