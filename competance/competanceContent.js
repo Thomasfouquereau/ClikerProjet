@@ -20,15 +20,15 @@ competanceContent.appendChild(competanceItemContainer); // Ajouté à competance
 const competanceArray = [
     {
         title: 'force',
-        description: 'ajoute 1 point de force et un malus de 15% sur l\'endurance a chaque achat',
+        description: 'ajoute 1 point de force et un malus de 10% sur l\'endurance a chaque achat',
     },
     {
         title: 'endurance',
-        description: 'ajoute 1 point d\'endurance et un malus de 15% sur le bouclier a chaque achat',
+        description: 'ajoute 1 point d\'endurance et un malus de 10% sur le bouclier a chaque achat',
     },
     {
         title: 'bouclier',
-        description: 'ajoute 1 point de bouclier et un malus de 15% sur la force a chaque achat',
+        description: 'ajoute 1 point de bouclier et un malus de 10% sur la force a chaque achat',
     },
 ];
 
@@ -50,7 +50,14 @@ function createCompetanceItem(title, description) {
     const competanceItemCost = document.createElement('p'); // Crée le coût de la compétence
     // Ajoute un id pour mettre à jour ce champ par la suite
     competanceItemCost.setAttribute('id', 'competanceCost-' + title);
-    competanceItemCost.textContent = 'Coût: ' + competenceStats[title + 'Cost'];
+    const costValue = Number(competenceStats[title + 'Cost']);
+    const { copper, silver, gold, platinum } = convertCurrencyAll(costValue, 0, 0, 0);
+    let parts = [];
+    if (platinum > 0) parts.push(`${platinum} P`);
+    if (gold > 0) parts.push(`${gold} G`);
+    if (silver > 0) parts.push(`${silver} S`);
+    if (copper > 0) parts.push(`${copper} C`);
+    competanceItemCost.textContent = `Coût: ${parts.join(', ')}`;
     competanceItem.appendChild(competanceItemCost); // Ajouté à competanceItem
 
     // Ajoute les événements pour afficher/masquer la description
@@ -80,33 +87,39 @@ export function competanceStatsDisplay() {
     } else {
         statsContainer.innerHTML = ''; // Nettoie les anciennes stats
     }
-    
+
     // Définit les statistiques à afficher
     const stats = [
         { id: 'force', label: 'Force', level: competenceStats.forceLvl, boost: competenceStats.forceBoost, malus: competenceStats.enduranceMalus, malusLabel: 'Endurance Malus' },
         { id: 'endurance', label: 'Endurance', level: competenceStats.enduranceLvl, boost: competenceStats.enduranceBoost, malus: competenceStats.bouclierMalus, malusLabel: 'Bouclier Malus' },
         { id: 'bouclier', label: 'Bouclier', level: competenceStats.bouclierLvl, boost: competenceStats.bouclierBoost, malus: competenceStats.forceMalus, malusLabel: 'Force Malus' }
     ];
-    
+
     // Pour chaque statistique, crée un bloc avec niveau, boost et malus
     stats.forEach(stat => {
         const statDiv = document.createElement('div');
         statDiv.classList.add(stat.id + 'Stats');
         statsContainer.appendChild(statDiv);
-        
+
         const levelP = document.createElement('p');
         // Mise à jour de l'élément identifié (pour permettre une future mise à jour individuelle)
         levelP.setAttribute('id', stat.id + 'Lvl');
         levelP.textContent = stat.label + ': ' + stat.level;
         statDiv.appendChild(levelP);
-        
+
         const boostP = document.createElement('p');
-        boostP.textContent = stat.label + ' Boost: ' + stat.boost;
+        boostP.textContent = stat.label + ' Boost: ' + Number(stat.boost).toFixed(2) + '%';
         statDiv.appendChild(boostP);
-        
+
         const malusP = document.createElement('p');
-        malusP.textContent = stat.malusLabel + ': ' + stat.malus;
+        malusP.textContent = stat.malusLabel + ': ' + Number(stat.malus).toFixed(2);
         statDiv.appendChild(malusP);
+
+        if (stat.id !== 'force') {
+            const maxP = document.createElement('p');
+            maxP.textContent = stat.label + ' Max: ' + competenceStats[stat.id + 'Max'];
+            statDiv.appendChild(maxP);
+        }
     });
 }
 

@@ -1,16 +1,20 @@
 import { competenceStats } from './competance.js'; // Importer les statistiques de compétence
 import { buy } from '../monnais/buy.js'; // Importer la fonction buy
 import { competanceStatsDisplay } from './competanceContent.js'; // Importer la fonction update des stats
+import { updateEnduranceDisplay, enduranceBarDisplay } from './endurance.js';
+import { convertCurrencyAll } from '../monnais/convertCurrency.js'; // Importer la fonction convertCurrencyAll
+
+updateEnduranceDisplay();
+enduranceBarDisplay();
 
 export function buyCompetance(title) {
     let cost = 0;
-    // Définit le coût de la compétence en fonction du titre
     if (title === 'force') {
-        cost = competenceStats.forceCost;
+        cost = Number(competenceStats.forceCost);
     } else if (title === 'endurance') {
-        cost = competenceStats.enduranceCost;
+        cost = Number(competenceStats.enduranceCost);
     } else if (title === 'bouclier') {
-        cost = competenceStats.bouclierCost;
+        cost = Number(competenceStats.bouclierCost);
     }
 
     // Vérifie que l'achat peut être effectué
@@ -21,43 +25,53 @@ export function buyCompetance(title) {
 
     // Met à jour les statistiques de compétence uniquement si l'achat a réussi
     if (title === 'force') {
-        competenceStats.forceLvl ++; // Augmente le niveau de force
-        competenceStats.forceCost *= 2; // Augmente le coût de la compétence de force
-        competenceStats.forceBoost *= 1.3; // Augmente le boost de force de 30%
-        competenceStats.enduranceMalus *= 1.1; // Augmente le malus d'endurance de 10%
-        // Enregistre les stats de force dans le localStorage
+        competenceStats.forceLvl++;
+        competenceStats.forceCost *= 2; // Met à jour le coût avant l'affichage
+        competenceStats.forceBoost *= 1.1;
+        competenceStats.enduranceMalus *= 1.05;
         localStorage.setItem('forceLvl', competenceStats.forceLvl);
         localStorage.setItem('forceCost', competenceStats.forceCost);
         localStorage.setItem('forceBoost', competenceStats.forceBoost);
         localStorage.setItem('enduranceMalus', competenceStats.enduranceMalus);
     } else if (title === 'endurance') {
-        competenceStats.enduranceLvl ++; // Augmente le niveau d'endurance
-        competenceStats.enduranceCost *= 2; // Augmente le coût de la compétence d'endurance
-        competenceStats.enduranceBoost *= 1.3; // Augmente le boost d'endurance de 30%
-        competenceStats.bouclierMalus *= 1.1; // Augmente le malus de bouclier de 10%
-        // Enregistre les stats d'endurance dans le localStorage
+        competenceStats.enduranceLvl++;
+        competenceStats.enduranceCost *= 2; // Met à jour le coût avant l'affichage
+        competenceStats.enduranceBoost *= 1.15;
+        competenceStats.bouclierMalus *= 1.05;
+        competenceStats.enduranceMax++;
         localStorage.setItem('enduranceLvl', competenceStats.enduranceLvl);
         localStorage.setItem('enduranceCost', competenceStats.enduranceCost);
         localStorage.setItem('enduranceBoost', competenceStats.enduranceBoost);
         localStorage.setItem('bouclierMalus', competenceStats.bouclierMalus);
+        localStorage.setItem('enduranceMax', competenceStats.enduranceMax);
     } else if (title === 'bouclier') {
-        competenceStats.bouclierLvl ++; // Augmente le niveau de bouclier
-        competenceStats.bouclierCost *= 2; // Augmente le coût de la compétence de bouclier
-        competenceStats.bouclierBoost *= 1.3; // Augmente le boost de bouclier de 30%
-        competenceStats.forceMalus *= 1.1; // Augmente le malus de force de 10%
-        // Enregistre les stats de bouclier dans le localStorage
+        competenceStats.bouclierLvl++;
+        competenceStats.bouclierCost *= 2; // Met à jour le coût avant l'affichage
+        competenceStats.bouclierBoost *= 1.1;
+        competenceStats.forceMalus *= 1.05;
+        competenceStats.bouclierMax++;
         localStorage.setItem('bouclierLvl', competenceStats.bouclierLvl);
         localStorage.setItem('bouclierCost', competenceStats.bouclierCost);
         localStorage.setItem('bouclierBoost', competenceStats.bouclierBoost);
         localStorage.setItem('forceMalus', competenceStats.forceMalus);
+        localStorage.setItem('bouclierMax', competenceStats.bouclierMax);
     }
 
-    // Mise à jour de l'affichage du coût dans le DOM
+    // Convertit le coût (exprimé en cuivre) en devises hiérarchisées
+    const costValue = Number(competenceStats[title + 'Cost']);
+    const { copper, silver, gold, platinum } = convertCurrencyAll(costValue, 0, 0, 0);
+    let parts = [];
+    if (platinum > 0) parts.push(`${platinum} P`);
+    if (gold > 0) parts.push(`${gold} G`);
+    if (silver > 0) parts.push(`${silver} S`);
+    if (copper > 0) parts.push(`${copper} C`);
+
+    // Récupère l'élément du DOM correspondant au coût
     const costElement = document.getElementById('competanceCost-' + title);
     if (costElement) {
-        costElement.textContent = 'Coût: ' + competenceStats[title + 'Cost'];
+        costElement.textContent = `Coût: ${parts.join(', ')}`;
     }
-    
+
     // Mise à jour des statistiques de compétence affichées dans le DOM
     competanceStatsDisplay();
 }

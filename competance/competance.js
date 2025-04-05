@@ -38,5 +38,8 @@ export const competenceStats = {
     forceMalus: localStorage.getItem('forceMalus') || 1,
     enduranceMalus: localStorage.getItem('enduranceMalus') || 1,
     bouclierMalus: localStorage.getItem('bouclierMalus') || 1,
+
+    enduranceMax: localStorage.getItem('enduranceMax') || 5,
+    bouclierMax: localStorage.getItem('bouclierMax') || 5,
 };
 
