@@ -128,8 +128,10 @@ export function competanceStatsDisplay() {
     statsContainer.appendChild(additionalStatsDiv);
 
     // Temps de recharge de l'endurance
+    // Temps de recharge de l'endurance
     const enduranceRechargeTime = document.createElement('p');
-    const enduranceRegeneration = Math.max(5000 * (1 - competenceStats.enduranceBoost / 100), 200); // Temps de régénération avec un minimum de 0,2s
+    const enduranceBoost = competenceStats.enduranceBoost || 0;
+    const enduranceRegeneration = Math.max(5000 * (1 - enduranceBoost / 100), 200); // Temps de régénération avec un minimum de 0,2s
     enduranceRechargeTime.textContent = `Temps de recharge de l'endurance : ${(enduranceRegeneration / 1000).toFixed(2)}s`;
     additionalStatsDiv.appendChild(enduranceRechargeTime);
 
@@ -147,8 +149,30 @@ export function competanceStatsDisplay() {
 
     // Taux de cuivre par clic
     const copperPerClick = document.createElement('p');
-    copperPerClick.textContent = `Taux de cuivre par clic : ${competenceStats.cuivreTauxPerClick.toFixed(2)} C`;
+    const forceBoost = competenceStats.forceBoost || 0;
+    const forceMalus = competenceStats.forceMalus || 0;
+    const cuivreTauxPerClick = competenceStats.cuivreTauxPerClick || 1;
+    const tauxCuivreParClic = cuivreTauxPerClick * (1 + (forceBoost - forceMalus) / 100);
+    copperPerClick.textContent = `Taux de cuivre par clic : ${tauxCuivreParClic.toFixed(2)} C`;
     additionalStatsDiv.appendChild(copperPerClick);
+
+    /// Nombre de fois que l'on peut cliquer
+    const clicksAvailable = document.createElement('p');
+    const enduranceMax = competenceStats.enduranceMax || 0; // Endurance maximale
+    const enduranceCurrent = Number(localStorage.getItem('currentEndurance')) || enduranceMax; // Endurance actuelle
+    const enduranceCost = competenceStats.enduranceMalus * Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100)); // Coût d'endurance par clic
+
+    // Calcul du nombre de clics possibles
+    let maxClicks = 0;
+    let remainingEndurance = enduranceCurrent;
+
+    while (remainingEndurance >= enduranceCost) {
+        maxClicks++;
+        remainingEndurance -= enduranceCost;
+    }
+
+    clicksAvailable.textContent = `Nombre de clics disponibles : ${maxClicks}`;
+    additionalStatsDiv.appendChild(clicksAvailable);
 }
 
 competanceStatsDisplay()
