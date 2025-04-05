@@ -4,14 +4,18 @@ import { enduranceUse, getCurrentEndurance } from './competance/endurance.js'; /
 import { competenceStats } from './competance/competance.js';
 
 const clickerButton = document.getElementById('clicker');
-const force = Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100));
+
+function calculateForce() {
+    return Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100));
+}
 
 clickerButton.addEventListener('click', () => {
+    const force = calculateForce(); // Recalcule la force dynamiquement
     // Vérifie si l'endurance actuelle est suffisante
-    if (getCurrentEndurance() > force) {
+    if (getCurrentEndurance() >= force) {
         updateScore(force); // Met à jour le score
         updateDisplays(); // Met à jour la monnaie
-        enduranceUse(competenceStats.enduranceMalus); // Utilise l'endurance
+        enduranceUse(force); // Utilise l'endurance en fonction de la force
     } else {
         console.log("Pas assez d'endurance pour cliquer !");
     }
@@ -19,7 +23,8 @@ clickerButton.addEventListener('click', () => {
 
 // Désactive le bouton si l'endurance est insuffisante
 setInterval(() => {
-    if (getCurrentEndurance() <= force) {
+    const force = calculateForce(); // Recalcule la force dynamiquement
+    if (getCurrentEndurance() < force) {
         clickerButton.disabled = true;
     } else {
         clickerButton.disabled = false;
