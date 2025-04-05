@@ -1,7 +1,7 @@
+
 import { convertCurrencyAll } from '../monnais/convertCurrency.js';// Importer la fonction convertCurrencyAll
 import { competenceStats } from './competance.js';// Importer les statistiques de compétence
 import { buyCompetance } from './buyCompetance.js';// Importer la fonction buyCompetance
-
 
 const competanceContentModal = document.getElementById('competanceContent');
 
@@ -20,7 +20,7 @@ competanceContent.appendChild(competanceItemContainer); // Ajouté à competance
 const competanceArray = [
     {
         title: 'force',
-        description: 'ajoute 1 point de force et un malus de 10% sur l\'endurance a chaque achat',
+        description: 'ajoute 1 point de force et un malus de 10% sur l\'endurance a chaque achat et ajoute 20% de coût d\'endurance',
     },
     {
         title: 'endurance',
@@ -143,24 +143,14 @@ export function competanceStatsDisplay() {
 
     // Coût d'endurance par clic
     const enduranceCostPerClick = document.createElement('p');
-    const force = Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100));
-    enduranceCostPerClick.textContent = `Coût d'endurance par clic : ${(competenceStats.enduranceMalus * force).toFixed(2)}`;
+    const enduranceCost = parseFloat(localStorage.getItem('enduranceCostPerClick')) || 1; // Récupère la valeur depuis localStorage
+    enduranceCostPerClick.textContent = `Coût d'endurance par clic : ${enduranceCost.toFixed(2)}`;
     additionalStatsDiv.appendChild(enduranceCostPerClick);
-
-    // Taux de cuivre par clic
-    const copperPerClick = document.createElement('p');
-    const forceBoost = competenceStats.forceBoost || 0;
-    const forceMalus = competenceStats.forceMalus || 0;
-    const cuivreTauxPerClick = competenceStats.cuivreTauxPerClick || 1;
-    const tauxCuivreParClic = cuivreTauxPerClick * (1 + (forceBoost - forceMalus) / 100);
-    copperPerClick.textContent = `Taux de cuivre par clic : ${tauxCuivreParClic.toFixed(2)} C`;
-    additionalStatsDiv.appendChild(copperPerClick);
 
     /// Nombre de fois que l'on peut cliquer
     const clicksAvailable = document.createElement('p');
     const enduranceMax = competenceStats.enduranceMax || 0; // Endurance maximale
     const enduranceCurrent = Number(localStorage.getItem('currentEndurance')) || enduranceMax; // Endurance actuelle
-    const enduranceCost = competenceStats.enduranceMalus * Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100)); // Coût d'endurance par clic
 
     // Calcul du nombre de clics possibles
     let maxClicks = 0;
@@ -173,6 +163,17 @@ export function competanceStatsDisplay() {
 
     clicksAvailable.textContent = `Nombre de clics disponibles : ${maxClicks}`;
     additionalStatsDiv.appendChild(clicksAvailable);
+
+    // Taux de cuivre par clic
+    const copperPerClick = document.createElement('p');
+    const forceBoost = competenceStats.forceBoost || 0;
+    const forceMalus = competenceStats.forceMalus || 0;
+    const cuivreTauxPerClick = competenceStats.cuivreTauxPerClick || 1;
+    const tauxCuivreParClic = cuivreTauxPerClick * (1 + (forceBoost - forceMalus) / 100);
+    copperPerClick.textContent = `Taux de cuivre par clic : ${tauxCuivreParClic.toFixed(2)} C`;
+    additionalStatsDiv.appendChild(copperPerClick);
+
+
 }
 
 competanceStatsDisplay()

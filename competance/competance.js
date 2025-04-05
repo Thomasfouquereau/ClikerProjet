@@ -1,3 +1,5 @@
+// import { enduranceUse } from "./endurance";
+
 const competanceBtn = document.getElementById('competance');
 const competanceModal = document.getElementById('competanceModal');
 const closeCompetanceBtn = document.getElementById('closeCompetanceModal');
@@ -41,6 +43,8 @@ export const competenceStats = {
 
     enduranceMax: localStorage.getItem('enduranceMax') || 10,
     bouclierMax: localStorage.getItem('bouclierMax') || 5,
+
+    enduranceCostPerClick: localStorage.getItem('enduranceCostPerClick') || 1,
 
     cuivreTauxPerClick: parseFloat(localStorage.getItem('cuivreTauxPerClick')) || 1,
 };

@@ -1,22 +1,25 @@
 import updateScore from './updateScore.js';
-import { updateDisplays } from './monnais/monnaie.js'; // Importez la fonction updateDisplays
-import { enduranceUse, getCurrentEndurance } from './competance/endurance.js'; // Importez une fonction pour récupérer l'endurance actuelle
+import { updateDisplays } from './monnais/monnaie.js';
+import { enduranceUse, getCurrentEndurance } from './competance/endurance.js';
 import { competenceStats } from './competance/competance.js';
+
+// Définir ou importer calculateForce
+function calculateForce(baseValue = 1) {
+    const forceBoost = competenceStats.forceBoost || 0;
+    const forceMalus = competenceStats.forceMalus || 0;
+    return baseValue * (1 + (forceBoost - forceMalus) / 100);
+}
 
 const clickerButton = document.getElementById('clicker');
 
-function calculateForce() {
-    return Math.max(1, competenceStats.cuivreTauxPerClick * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100));
-}
-
 clickerButton.addEventListener('click', () => {
-    const force = calculateForce(); // Recalcule la force dynamiquement
+    const enduranceCost = parseFloat(localStorage.getItem('enduranceCostPerClick')) || 1; // Récupère la valeur depuis localStorage
+    console.log("enduranceCostPerClick : " + enduranceCost.toFixed(2));
 
-    // Vérifie si l'endurance actuelle est suffisante
-    if (getCurrentEndurance() >= force) {
-        updateScore(force); // Met à jour le score
-        updateDisplays(); // Met à jour la monnaie
-        enduranceUse(force); // Utilise l'endurance en fonction de la force
+    if (getCurrentEndurance() >= enduranceCost) {
+        updateScore(calculateForce(competenceStats.cuivreTauxPerClick));
+        updateDisplays();
+        enduranceUse(enduranceCost); // Utilise la valeur récupérée
     } else {
         console.log("Pas assez d'endurance pour cliquer !");
     }
@@ -24,7 +27,7 @@ clickerButton.addEventListener('click', () => {
 
 // Désactive le bouton si l'endurance est insuffisante
 setInterval(() => {
-    const force = calculateForce(); // Recalcule la force dynamiquement
+    const force = calculateForce();
     if (getCurrentEndurance() < force) {
         clickerButton.disabled = true;
     } else {

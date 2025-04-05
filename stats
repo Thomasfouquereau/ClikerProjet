@@ -1,0 +1,121 @@
+Liste des statistiques et leurs utilisations dans le projet :
+
+1. forceLvl
+   - Définition : Niveau de force.
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+     - competance/buyCompetance.js : Incrémenté lors de l'achat de la compétence "force".
+
+2. enduranceLvl
+   - Définition : Niveau d'endurance.
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+     - competance/buyCompetance.js : Incrémenté lors de l'achat de la compétence "endurance".
+
+3. bouclierLvl
+   - Définition : Niveau de bouclier.
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+     - competance/buyCompetance.js : Incrémenté lors de l'achat de la compétence "bouclier".
+
+4. forceCost
+   - Définition : Coût de la compétence "force".
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans createCompetanceItem.
+     - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "force".
+
+5. enduranceCost
+   - Définition : Coût de la compétence "endurance".
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans createCompetanceItem.
+     - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "endurance".
+     - competance/endurance.js : Utilisé pour réduire l'endurance lors d'un clic.
+     - clickSpace.js : Utilisé pour calculer le coût d'endurance par clic.
+
+6. bouclierCost
+   - Définition : Coût de la compétence "bouclier".
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans createCompetanceItem.
+     - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "bouclier".
+
+7. forceBoost
+   - Définition : Boost de force.
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+     - clickSpace.js : Utilisé dans calculateForce pour calculer la force.
+     - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "force".
+
+8. enduranceBoost
+   - Définition : Boost d'endurance.
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+     - competance/endurance.js : Utilisé pour calculer le temps de régénération de l'endurance.
+     - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "endurance".
+
+9. bouclierBoost
+   - Définition : Boost de bouclier.
+   - Emplacement : competance/competance.js
+   - Utilisation :
+     - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+     - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "bouclier".
+
+10. forceMalus
+    - Définition : Malus de force.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - clickSpace.js : Utilisé dans calculateForce pour calculer la force.
+      - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "bouclier".
+
+11. enduranceMalus
+    - Définition : Malus d'endurance.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "force".
+      - competance/calculateEnduranceCost.js : Utilisé pour calculer le coût d'endurance.
+
+12. bouclierMalus
+    - Définition : Malus de bouclier.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "endurance".
+
+13. enduranceMax
+    - Définition : Endurance maximale.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - competance/endurance.js : Utilisé pour limiter l'endurance et calculer la barre d'endurance.
+      - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "endurance".
+
+14. bouclierMax
+    - Définition : Bouclier maximal.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "bouclier".
+
+15. cuivreTauxPerClick
+    - Définition : Taux de cuivre gagné par clic.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - clickSpace.js : Utilisé pour calculer le score ajouté par clic.
+      - competance/buyCompetance.js : Mis à jour après l'achat de la compétence "force".
+
+16. enduranceCostPerClick
+    - Définition : Coût d'endurance par clic.
+    - Emplacement : competance/competance.js
+    - Utilisation :
+      - competance/competanceContent.js : Affiché dans competanceStatsDisplay.
+      - clickSpace.js : Utilisé pour calculer la consommation d'endurance lors d'un clic.

@@ -30,11 +30,13 @@ export function buyCompetance(title) {
         competenceStats.forceBoost *= 1.4;
         competenceStats.enduranceMalus *= 1.05;
         competenceStats.cuivreTauxPerClick *= 1.5; // Augmente le taux de cuivre par clic
+        competenceStats.enduranceCostPerClick *= 1.2; // Augmente le coût d'endurance par clic
         localStorage.setItem('forceLvl', competenceStats.forceLvl);
         localStorage.setItem('forceCost', competenceStats.forceCost);
         localStorage.setItem('forceBoost', competenceStats.forceBoost);
         localStorage.setItem('enduranceMalus', competenceStats.enduranceMalus);
         localStorage.setItem('cuivreTauxPerClick', competenceStats.cuivreTauxPerClick);
+        localStorage.setItem('enduranceCostPerClick', competenceStats.enduranceCostPerClick); // Met à jour le coût d'endurance
     } else if (title === 'endurance') {
         competenceStats.enduranceLvl++;
         competenceStats.enduranceCost *= 2; // Met à jour le coût avant l'affichage
