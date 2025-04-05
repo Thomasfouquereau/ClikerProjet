@@ -11,6 +11,9 @@ export function convertCurrencyAll(copper, silver, gold, platinum) {
         platinum += Math.floor(gold / 10000);
         gold = gold % 10000;
     }
+
+    // Arrondir copper à deux décimales
+    copper = parseFloat(copper.toFixed(2));
+
     return { copper, silver, gold, platinum };
 }
-

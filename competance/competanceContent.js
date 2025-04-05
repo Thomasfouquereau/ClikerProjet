@@ -48,7 +48,6 @@ function createCompetanceItem(title, description) {
     competanceItem.appendChild(competanceItemDescription); // Ajouté à competanceItem
 
     const competanceItemCost = document.createElement('p'); // Crée le coût de la compétence
-    // Ajoute un id pour mettre à jour ce champ par la suite
     competanceItemCost.setAttribute('id', 'competanceCost-' + title);
     const costValue = Number(competenceStats[title + 'Cost']);
     const { copper, silver, gold, platinum } = convertCurrencyAll(costValue, 0, 0, 0);
@@ -56,7 +55,7 @@ function createCompetanceItem(title, description) {
     if (platinum > 0) parts.push(`${platinum} P`);
     if (gold > 0) parts.push(`${gold} G`);
     if (silver > 0) parts.push(`${silver} S`);
-    if (copper > 0) parts.push(`${copper} C`);
+    if (copper > 0) parts.push(`${parseFloat(copper.toFixed(2))} C`); // Assurez-vous que copper est bien formaté
     competanceItemCost.textContent = `Coût: ${parts.join(', ')}`;
     competanceItem.appendChild(competanceItemCost); // Ajouté à competanceItem
 

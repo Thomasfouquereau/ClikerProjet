@@ -25,9 +25,9 @@ closeCompetanceBtn.addEventListener('click', () => {
 });
 
 export const competenceStats = {
-    forceLvl: localStorage.getItem('forceLvl') || 0,
-    enduranceLvl: localStorage.getItem('enduranceLvl') || 0,
-    bouclierLvl: localStorage.getItem('bouclierLvl') || 0,
+    forceLvl: localStorage.getItem('forceLvl') || 1,
+    enduranceLvl: localStorage.getItem('enduranceLvl') || 1,
+    bouclierLvl: localStorage.getItem('bouclierLvl') || 1,
 
     forceCost: localStorage.getItem('forceCost') || 10,
     enduranceCost: localStorage.getItem('enduranceCost') || 10,

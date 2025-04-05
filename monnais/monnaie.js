@@ -49,7 +49,7 @@ export function updateDisplays() {
     platinum = parseInt(localStorage.getItem('platinum')) || 0;
 
     convertCurrency();
-    copperMonnaie.textContent = copper;
+    copperMonnaie.textContent = copper.toFixed(2); // Afficher avec deux décimales
     silverMonnaie.textContent = silver;
     goldMonnaie.textContent = gold;
     platinumMonnaie.textContent = platinum;

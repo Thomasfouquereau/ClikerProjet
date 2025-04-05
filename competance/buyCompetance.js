@@ -26,9 +26,9 @@ export function buyCompetance(title) {
     // Met à jour les statistiques de compétence uniquement si l'achat a réussi
     if (title === 'force') {
         competenceStats.forceLvl++;
-        competenceStats.forceCost *= 2; // Met à jour le coût avant l'affichage
+        competenceStats.forceCost *= 1.6; // Met à jour le coût avant l'affichage
         competenceStats.forceBoost *= 1.4;
-        competenceStats.enduranceMalus *= 1.05;
+        competenceStats.enduranceMalus *= 1.1;
         competenceStats.cuivreTauxPerClick *= 1.5; // Augmente le taux de cuivre par clic
         competenceStats.enduranceCostPerClick *= 1.2; // Augmente le coût d'endurance par clic
         localStorage.setItem('forceLvl', competenceStats.forceLvl);
@@ -39,9 +39,9 @@ export function buyCompetance(title) {
         localStorage.setItem('enduranceCostPerClick', competenceStats.enduranceCostPerClick); // Met à jour le coût d'endurance
     } else if (title === 'endurance') {
         competenceStats.enduranceLvl++;
-        competenceStats.enduranceCost *= 2; // Met à jour le coût avant l'affichage
+        competenceStats.enduranceCost *= 1.6; // Met à jour le coût avant l'affichage
         competenceStats.enduranceBoost *= 1.75;
-        competenceStats.bouclierMalus *= 1.05;
+        competenceStats.bouclierMalus *= 1.1;
         competenceStats.enduranceMax++;
         localStorage.setItem('enduranceLvl', competenceStats.enduranceLvl);
         localStorage.setItem('enduranceCost', competenceStats.enduranceCost);
@@ -50,9 +50,9 @@ export function buyCompetance(title) {
         localStorage.setItem('enduranceMax', competenceStats.enduranceMax);
     } else if (title === 'bouclier') {
         competenceStats.bouclierLvl++;
-        competenceStats.bouclierCost *= 2; // Met à jour le coût avant l'affichage
+        competenceStats.bouclierCost *= 1.6; // Met à jour le coût avant l'affichage
         competenceStats.bouclierBoost *= 1.1;
-        competenceStats.forceMalus *= 1.05;
+        competenceStats.forceMalus *= 1.1;
         competenceStats.bouclierMax++;
         localStorage.setItem('bouclierLvl', competenceStats.bouclierLvl);
         localStorage.setItem('bouclierCost', competenceStats.bouclierCost);
