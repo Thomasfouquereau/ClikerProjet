@@ -27,7 +27,7 @@ export function buyCompetance(title) {
     if (title === 'force') {
         competenceStats.forceLvl++;
         competenceStats.forceCost *= 2; // Met à jour le coût avant l'affichage
-        competenceStats.forceBoost *= 1.1;
+        competenceStats.forceBoost *= 1.4;
         competenceStats.enduranceMalus *= 1.05;
         localStorage.setItem('forceLvl', competenceStats.forceLvl);
         localStorage.setItem('forceCost', competenceStats.forceCost);

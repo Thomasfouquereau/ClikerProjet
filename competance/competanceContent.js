@@ -112,7 +112,7 @@ export function competanceStatsDisplay() {
         statDiv.appendChild(boostP);
 
         const malusP = document.createElement('p');
-        malusP.textContent = stat.malusLabel + ': ' + Number(stat.malus).toFixed(2);
+        malusP.textContent = stat.malusLabel + ': ' + Number(stat.malus).toFixed(2) + '%';
         statDiv.appendChild(malusP);
 
         if (stat.id !== 'force') {
@@ -121,6 +121,29 @@ export function competanceStatsDisplay() {
             statDiv.appendChild(maxP);
         }
     });
+
+    // Ajoute des statistiques supplémentaires
+    const additionalStatsDiv = document.createElement('div');
+    additionalStatsDiv.classList.add('additionalStats');
+    statsContainer.appendChild(additionalStatsDiv);
+
+    // Temps de recharge de l'endurance
+    const enduranceRechargeTime = document.createElement('p');
+    const enduranceRegeneration = Math.max(5000 * (1 - competenceStats.enduranceBoost / 100), 200); // Temps de régénération avec un minimum de 0,2s
+    enduranceRechargeTime.textContent = `Temps de recharge de l'endurance : ${(enduranceRegeneration / 1000).toFixed(2)}s`;
+    additionalStatsDiv.appendChild(enduranceRechargeTime);
+
+    // Temps de recharge total de l'endurance
+    const totalEnduranceRechargeTime = document.createElement('p');
+    const totalRechargeTime = competenceStats.enduranceMax * enduranceRegeneration;
+    totalEnduranceRechargeTime.textContent = `Temps de recharge total de l'endurance : ${(totalRechargeTime / 1000).toFixed(2)}s`;
+    additionalStatsDiv.appendChild(totalEnduranceRechargeTime);
+
+    // Coût d'endurance par clic
+    const enduranceCostPerClick = document.createElement('p');
+    const force = Math.max(1, 1 * (1 + (competenceStats.forceBoost - competenceStats.forceMalus) / 100));
+    enduranceCostPerClick.textContent = `Coût d'endurance par clic : ${(competenceStats.enduranceMalus * force).toFixed(2)}`;
+    additionalStatsDiv.appendChild(enduranceCostPerClick);
 }
 
 competanceStatsDisplay()
