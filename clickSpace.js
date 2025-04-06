@@ -5,6 +5,7 @@ import { competenceStats, calculateDamagePerClick } from './competance/competanc
 import { createEnemy } from './enemy/enemy.js';
 import { updateHealthBar } from './enemy/enemyLife.js';
 import { addCopper } from './monnais/monnaie.js'; // Importer la fonction addCopper
+import { changeFloor } from './tower/floor.js'; // Importer la fonction changeFloor
 
 // Définir ou importer calculateForce
 function calculateForce(baseValue = 1) {
@@ -17,6 +18,7 @@ const clickerButton = document.getElementById('clicker');
 
 // Variable pour stocker l'ennemi actuel
 let currentEnemy = null;
+let enemiesDefeated = 0; // Compteur d'ennemis tués
 
 // Fonction pour gérer les dégâts infligés à l'ennemi
 function attackEnemy() {
@@ -43,6 +45,12 @@ function attackEnemy() {
             addCopper(copperReward);
             updateDisplays();
 
+            enemiesDefeated++; // Incrémente le compteur d'ennemis tués
+            if (enemiesDefeated >= 5) {
+                changeFloor(); // Change d'étage après 5 ennemis tués
+                enemiesDefeated = 0; // Réinitialise le compteur
+            }
+
             spawnNewEnemy(); // Fait apparaître un nouvel ennemi
         }
 
@@ -56,6 +64,10 @@ function attackEnemy() {
 // Fonction pour faire apparaître un nouvel ennemi
 function spawnNewEnemy() {
     currentEnemy = createEnemy(); // Crée un nouvel ennemi
+    if (!currentEnemy) {
+        console.error("Impossible de créer un nouvel ennemi.");
+        return;
+    }
     console.log(`Un nouvel ennemi est apparu : ${currentEnemy.type.name} avec ${currentEnemy.health} HP.`);
 }
 
