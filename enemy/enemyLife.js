@@ -29,7 +29,7 @@ export function updateHealthBar(enemy) {
 
         // Met à jour le texte des HP
         if (enemy.healthText) {
-            enemy.healthText.textContent = `${Math.max(enemy.health, 0)} / ${enemy.type.life}`;
+            enemy.healthText.textContent = `${Math.max(enemy.health.toFixed(2), 0)} / ${enemy.type.life}`;
         }
     } else {
         console.error("La barre de vie de l'ennemi est introuvable.");

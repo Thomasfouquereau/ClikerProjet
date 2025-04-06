@@ -176,6 +176,15 @@ button:disabled,
     transition: width 0.2s ease-in-out; /* Animation pour un effet fluide */
 }
 
+.health-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: white;
+}
+
 #enduranceBarContainer{
     height: 40px;
     background-color: #ddd;
