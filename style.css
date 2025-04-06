@@ -154,6 +154,28 @@ button:disabled,
     border-radius: 40px;
 }
 
+.enemy-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.health-bar-container {
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    border: 1px solid #000;
+    margin-top: 5px;
+    position: relative;
+}
+
+.health-bar {
+    height: 100%;
+    background-color: red;
+    width: 100%; /* La largeur initiale est de 100% */
+    transition: width 0.2s ease-in-out; /* Animation pour un effet fluide */
+}
+
 #enduranceBarContainer{
     height: 40px;
     background-color: #ddd;
@@ -219,4 +241,90 @@ button:disabled,
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.5s;
+}
+
+/* Conteneur des items */
+.inventaireItemContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Style des placeholders */
+.placeholder {
+    width: 70px;
+    height: 70px;
+    background-color: lightgray;
+    border: 2px dashed gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    color: gray;
+}
+
+/* Style des items */
+.inventaireItem {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    color: black;
+}
+
+/* Rareté commune */
+.rarete-commune {
+    background-color: lightgray;
+    border: 2px solid gray;
+}
+
+/* Rareté rare */
+.rarete-rare {
+    background-color: lightblue;
+    border: 2px solid blue;
+}
+
+/* Rareté épique */
+.rarete-epique {
+    background-color:  rgb(175, 101, 206);
+    border: 2px solid purple;
+}
+
+/* Rareté légendaire */
+.rarete-legendaire {
+    background-color: rgb(243, 214, 55);
+    border: 2px solid orange;
+    color: black;
+}
+
+.contextMenu {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contextMenu button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.contextMenu button:hover {
+    background-color: #ddd;
 }

@@ -1,4 +1,3 @@
-
 const inventaireButton = document.getElementById('inventaireButton');
 const inventaireModal = document.getElementById('inventaireModal');
 const closeInventaireButton = document.getElementById('closeInventaireModal');
@@ -27,3 +26,4 @@ export let inventaire = {
     items: [], // Liste des objets dans l'inventaire
     maxItems: 10, // Capacité maximale de l'inventaire
 };
+

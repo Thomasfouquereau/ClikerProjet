@@ -101,7 +101,6 @@ export function competanceStatsDisplay() {
         statsContainer.appendChild(statDiv);
 
         const levelP = document.createElement('p');
-        // Mise à jour de l'élément identifié (pour permettre une future mise à jour individuelle)
         levelP.setAttribute('id', stat.id + 'Lvl');
         levelP.textContent = stat.label + ': ' + stat.level;
         statDiv.appendChild(levelP);
@@ -127,10 +126,10 @@ export function competanceStatsDisplay() {
     statsContainer.appendChild(additionalStatsDiv);
 
     // Temps de recharge de l'endurance
-    const enduranceRechargeTime = document.createElement('p'); // Crée un élément <p> pour afficher le temps de recharge
-    const enduranceRegenerationTimer = parseFloat(localStorage.getItem('enduranceRegenerationTimer')) || 4000; // Valeur par défaut de 4000 ms
-    const enduranceBoost = competenceStats.enduranceBoost || 0; // Boost d'endurance en pourcentage
-    const enduranceRegeneration = Math.max(200, enduranceRegenerationTimer * (1 - enduranceBoost / 100)); // Réduction basée sur le pourcentage
+    const enduranceRechargeTime = document.createElement('p');
+    const enduranceRegenerationTimer = parseFloat(localStorage.getItem('enduranceRegenerationTimer')) || 4000;
+    const enduranceBoost = competenceStats.enduranceBoost || 0;
+    const enduranceRegeneration = Math.max(200, enduranceRegenerationTimer * (1 - enduranceBoost / 100));
     enduranceRechargeTime.textContent = `Temps de recharge de l'endurance : ${(enduranceRegeneration / 1000).toFixed(2)}s`;
     additionalStatsDiv.appendChild(enduranceRechargeTime);
 
@@ -142,16 +141,14 @@ export function competanceStatsDisplay() {
 
     // Coût d'endurance par clic
     const enduranceCostPerClick = document.createElement('p');
-    const enduranceCost = parseFloat(localStorage.getItem('enduranceCostPerClick')) || 1; // Récupère la valeur depuis localStorage
+    const enduranceCost = parseFloat(localStorage.getItem('enduranceCostPerClick')) || 1;
     enduranceCostPerClick.textContent = `Coût d'endurance par clic : ${enduranceCost.toFixed(2)}`;
     additionalStatsDiv.appendChild(enduranceCostPerClick);
 
-    /// Nombre de fois que l'on peut cliquer
+    // Nombre de clics disponibles
     const clicksAvailable = document.createElement('p');
-    const enduranceMax = competenceStats.enduranceMax || 0; // Endurance maximale
-    const enduranceCurrent = Number(localStorage.getItem('currentEndurance')) || enduranceMax; // Endurance actuelle
-
-    // Calcul du nombre de clics possibles
+    const enduranceMax = competenceStats.enduranceMax || 0;
+    const enduranceCurrent = Number(localStorage.getItem('currentEndurance')) || enduranceMax;
     let maxClicks = 0;
     let remainingEndurance = enduranceCurrent;
 
@@ -172,7 +169,21 @@ export function competanceStatsDisplay() {
     copperPerClick.textContent = `Taux de cuivre par clic : ${tauxCuivreParClic.toFixed(2)} C`;
     additionalStatsDiv.appendChild(copperPerClick);
 
+    // Dégâts par clic
+    const damagePerClick = document.createElement('p');
+    const baseDamage = competenceStats.domagePerClick || 1;
+    const damageBoost = competenceStats.domageBoost || 0;
+    const damageMalus = competenceStats.domageMalus || 0;
+    const totalDamagePerClick = baseDamage * (1 + (damageBoost - damageMalus) / 100);
+    damagePerClick.textContent = `Dégâts par clic : ${totalDamagePerClick.toFixed(2)}`;
+    additionalStatsDiv.appendChild(damagePerClick);
 
+    // DPS (Dégâts par seconde)
+    const dps = document.createElement('p');
+    const clicksPerSecond = enduranceMax / enduranceCost / (enduranceRegeneration / 1000);
+    const totalDPS = totalDamagePerClick * clicksPerSecond;
+    dps.textContent = `DPS : ${totalDPS.toFixed(2)}`;
+    additionalStatsDiv.appendChild(dps);
 }
 
 competanceStatsDisplay()

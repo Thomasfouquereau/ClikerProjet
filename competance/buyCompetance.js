@@ -31,23 +31,27 @@ export function buyCompetance(title) {
         competenceStats.enduranceMalus *= 1.1;
         competenceStats.cuivreTauxPerClick *= 1.5; // Augmente le taux de cuivre par clic
         competenceStats.enduranceCostPerClick *= 1.2; // Augmente le coût d'endurance par clic
+        competenceStats.domagePerClick *= 1.5; // Augmente le domage par clic
         localStorage.setItem('forceLvl', competenceStats.forceLvl);
         localStorage.setItem('forceCost', competenceStats.forceCost);
         localStorage.setItem('forceBoost', competenceStats.forceBoost);
         localStorage.setItem('enduranceMalus', competenceStats.enduranceMalus);
         localStorage.setItem('cuivreTauxPerClick', competenceStats.cuivreTauxPerClick);
         localStorage.setItem('enduranceCostPerClick', competenceStats.enduranceCostPerClick); // Met à jour le coût d'endurance
+        localStorage.setItem('domagePerClick', competenceStats.domagePerClick); // Met à jour le domage par clic
     } else if (title === 'endurance') {
         competenceStats.enduranceLvl++;
         competenceStats.enduranceCost *= 1.6; // Met à jour le coût avant l'affichage
         competenceStats.enduranceBoost *= 1.75;
         competenceStats.bouclierMalus *= 1.1;
         competenceStats.enduranceMax++;
+        competenceStats.domageBoost *= 1.2; // Augmente le domage boost
         localStorage.setItem('enduranceLvl', competenceStats.enduranceLvl);
         localStorage.setItem('enduranceCost', competenceStats.enduranceCost);
         localStorage.setItem('enduranceBoost', competenceStats.enduranceBoost);
         localStorage.setItem('bouclierMalus', competenceStats.bouclierMalus);
         localStorage.setItem('enduranceMax', competenceStats.enduranceMax);
+        localStorage.setItem('domageBoost', competenceStats.domageBoost); // Met à jour le domage boost
     } else if (title === 'bouclier') {
         competenceStats.bouclierLvl++;
         competenceStats.bouclierCost *= 1.6; // Met à jour le coût avant l'affichage
