@@ -32,12 +32,16 @@ export function updateEnduranceDisplay() {
 /// Ajoutez un élément pour afficher le timer
 const enduranceTimerDisplay = document.getElementById('enduranceTimer');
 
-// Définir enduranceRegenerationTimer avant son utilisation
-const enduranceRegenerationTimer = parseFloat(localStorage.getItem('enduranceRegenerationTimer')) || 4000; // Valeur par défaut de 4000 ms
-const enduranceBoost = competenceStats.enduranceBoost || 0; // Boost d'endurance en pourcentage
-const enduranceRegeneration = Math.max(20, enduranceRegenerationTimer * (1 - enduranceBoost / 100)); // Temps de régénération avec un minimum de 0,2s
+// Fonction pour calculer dynamiquement le temps de régénération
+function calculateEnduranceRegeneration() {
+    const enduranceRegenerationTimer = parseFloat(localStorage.getItem('enduranceRegenerationTimer')) || 4000; // Valeur par défaut de 4000 ms
+    const enduranceBoost = competenceStats.enduranceBoost || 0; // Boost d'endurance en pourcentage
+    return Math.max(20, enduranceRegenerationTimer * (1 - enduranceBoost / 100)); // Temps de régénération avec un minimum de 0,2s
+}
 
 setInterval(() => {
+    const enduranceRegeneration = calculateEnduranceRegeneration(); // Recalcule la régénération à chaque intervalle
+
     if (endurance < Number(competenceStats.enduranceMax)) {
         timer -= 100; // Réduit le timer de 100 ms
         if (timer <= 0) {

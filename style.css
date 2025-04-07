@@ -342,3 +342,9 @@ button:disabled,
 .contextMenu button:hover {
     background-color: #ddd;
 }
+
+#floorText{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}

@@ -48,9 +48,9 @@ export function createEnemy() {
     } else if (selectedEnemy.name === 'Troll') {
         enemyImage.src = '../addon/troll.png'; // Image spécifique pour le Troll
     } else if (selectedEnemy.name === 'Dragon') {
-        enemyImage.src = '../addon/enemy.png'; // Image spécifique pour le Dragon
+        enemyImage.src = '../addon/Dragon.png'; // Image spécifique pour le Dragon
     } else if (selectedEnemy.name === 'Demon') {
-        enemyImage.src = '../addon/enemy.png'; // Image spécifique pour le Demon
+        enemyImage.src = '../addon/Demon.png'; // Image spécifique pour le Demon
     } else if (selectedEnemy.name === 'Golem') {
         enemyImage.src = '../addon/golem.png'; // Image spécifique pour le Golem
     }
